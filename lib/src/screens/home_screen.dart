@@ -39,8 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: const OutlineInputBorder(),
                 suffixIcon: InkWell(
                   onTap: () {
-                    context.read<BreedProvider>().seachBreedsByFilter(
-                          searchController.text.replaceAll(" ", "+"),
+                    String filter = searchController.text.replaceAll(" ", "+");
+                    context.read<BreedProvider>().searchBreedsByFilter(
+                          filter,
                         );
                   },
                   child: const Icon(Icons.search),

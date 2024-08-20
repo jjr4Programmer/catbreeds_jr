@@ -19,7 +19,7 @@ class BreedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void seachBreedsByFilter(String filter) async {
+  void searchBreedsByFilter(String filter) async {
     _isLoading = true;
     notifyListeners();
 

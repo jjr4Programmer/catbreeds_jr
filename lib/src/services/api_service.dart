@@ -19,7 +19,7 @@ class ApiService {
       api += "/search?q=$search";
     }
     try {
-      final response = (await dio!.get<List<dynamic>>(api));
+      final response = await dio!.get<List<dynamic>>(api);
       if (response.statusCode == 200) {
         var data = response.data;
         if (data != null) {
