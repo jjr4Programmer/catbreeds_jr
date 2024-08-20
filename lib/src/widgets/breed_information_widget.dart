@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catbreeds_app/src/models/breed_model/breed_model.dart';
 import 'package:catbreeds_app/src/screens/breed_detail_screen.dart';
-import 'package:catbreeds_app/src/services/api_service.dart';
 import 'package:catbreeds_app/src/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +28,7 @@ class BreedInformationWidget extends StatelessWidget {
               children: [
                 Text(
                   model.name ?? '--',
-                  style: AppTextStyles.headline3,
+                  style: AppTextStyles.headline2,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -61,47 +60,16 @@ class BreedInformationWidget extends StatelessWidget {
               children: [
                 Text(
                   model.origin ?? '--',
-                  style: AppTextStyles.headline3,
+                  style: AppTextStyles.headline2,
                 ),
                 Text(
                   "${model.intelligence ?? '--'}",
-                  style: AppTextStyles.headline3,
+                  style: AppTextStyles.headline2,
                 ),
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget futureImageBreedWidget(Size size) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: FutureBuilder(
-        future: ApiService().getBreedImageUrl(model.id ?? ""),
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox(
-                width: size.width * 0.1,
-                child: const CircularProgressIndicator());
-          } else {
-            if (snapshot.hasData) {
-              return CachedNetworkImage(
-                imageUrl: snapshot.data ?? "",
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    SizedBox(
-                  width: size.width * 0.1,
-                  child: CircularProgressIndicator(
-                      value: downloadProgress.progress),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              );
-            } else {
-              return const Text("Ocurrió un error");
-            }
-          }
-        },
       ),
     );
   }

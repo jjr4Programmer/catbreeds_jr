@@ -23,7 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                HomeScreen()), // Navegar a la pantalla principal
+                const HomeScreen()), // Navegar a la pantalla principal
       );
     });
   }

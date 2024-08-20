@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:catbreeds_app/src/constants.dart';
 import 'package:catbreeds_app/src/models/breed_model/breed_model.dart';
 import 'package:catbreeds_app/src/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
