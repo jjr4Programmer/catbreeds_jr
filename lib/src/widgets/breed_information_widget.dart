@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catbreeds_app/src/models/breed_model/breed_model.dart';
+import 'package:catbreeds_app/src/screens/breed_detail_screen.dart';
 import 'package:catbreeds_app/src/services/api_service.dart';
+import 'package:catbreeds_app/src/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class BreedInformationWidget extends StatelessWidget {
@@ -25,19 +27,46 @@ class BreedInformationWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(model.name ?? "--"),
-                TextButton(
-                  onPressed: () {},
+                Text(
+                  model.name ?? '--',
+                  style: AppTextStyles.headline3,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BreedDetailScreen(model),
+                      ),
+                    );
+                  },
                   child: const Text("Más..."),
                 )
               ],
             ),
-            futureImageBreedWidget(size),
+            Hero(
+              tag: "__${model.id}__",
+              child: CachedNetworkImage(
+                imageUrl: model.getImageUrl(),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    SizedBox(
+                  width: size.width * 0.1,
+                  child: CircularProgressIndicator(
+                      value: downloadProgress.progress),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(model.origin ?? "--"),
-                Text("${model.intelligence ?? '--'}"),
+                Text(
+                  model.origin ?? '--',
+                  style: AppTextStyles.headline3,
+                ),
+                Text(
+                  "${model.intelligence ?? '--'}",
+                  style: AppTextStyles.headline3,
+                ),
               ],
             ),
           ],

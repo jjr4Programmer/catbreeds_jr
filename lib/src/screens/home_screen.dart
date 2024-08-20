@@ -1,7 +1,5 @@
-import 'package:catbreeds_app/main.dart';
 import 'package:catbreeds_app/src/constants.dart';
 import 'package:catbreeds_app/src/providers/breed_provider.dart';
-import 'package:catbreeds_app/src/services/api_service.dart';
 import 'package:catbreeds_app/src/widgets/breed_information_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,14 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: searchController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                suffixIcon: InkWell(
+                  onTap: () {
+                    context.read<BreedProvider>().seachBreedsByFilter(
+                          searchController.text.replaceAll(" ", "+"),
+                        );
+                  },
+                  child: const Icon(Icons.search),
+                ),
               ),
-              onSubmitted: (_) {
-                context.read<BreedProvider>().seachBreedsByFilter(
-                    searchController.text.replaceAll(" ", "+"));
-              },
             ),
           ),
           const BreedInformationList()
